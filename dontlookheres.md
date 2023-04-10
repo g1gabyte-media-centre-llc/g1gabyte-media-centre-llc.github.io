@@ -1,0 +1,2 @@
+hcaptcha sitekey aad086ea-02c4-4d58-a24c-5a03b0b875a3
+hcaptcha secret 0xc7e5f1a64CB39D700edADdd39c1BE515CFA265f8
