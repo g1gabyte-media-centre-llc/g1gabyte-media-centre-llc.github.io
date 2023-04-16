@@ -1,0 +1,144 @@
+body {
+  background-color: black;
+}
+.rick {
+  min-height: 100vh;
+  max-width: 100vw;
+  object-fit: cover;
+  margin: auto;
+  display: flex;
+}
+.cont {
+  display: none;
+}
+.cont__header {
+  color: white;
+}
+.roll {
+  display: none;
+}
+.border {
+  margin: auto;
+  width: 560px;
+  max-width: 98%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 400;
+}
+.thumbnail {
+  max-width: 100%;
+  z-index: 0;
+}
+.play-button {
+  position: absolute;
+  z-index: 300;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.play-button svg {
+  fill: rgba(0, 0, 0, 0.7);
+  transition: 0.2s;
+}
+.white {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 299;
+}
+.border:hover .play-button svg {
+  fill: red;
+}
+
+.holder {
+  min-height: 100vh;
+  min-width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  width: 100vw;
+  overflow-x: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.slider-cont {
+  background-color: var(--primary);
+  animation: slide-out 0.8s forwards 6s;
+  -webkit-animation: slide-out 0.8s forwards 6s;
+  transform: translate(100%);
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  min-height: calc(100vh - 193px);
+  padding: 30px;
+}
+
+.slider-cont * {
+  color: white;
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@-webkit-keyframes slide-out {
+  0% {
+    -webkit-transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(0%);
+  }
+}
+
+.pic {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.angle {
+  position: absolute;
+  top: -59px;
+  width: 100%;
+}
+
+.inner-slider {
+  background-color: var(--light);
+  padding: 15px;
+  animation: slide-in 0.8s forwards 6s;
+  -webkit-animation: slide-in 0.8s forwards 6s;
+  transform: translate(-100%);
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@-webkit-keyframes slide-in {
+  0% {
+    -webkit-transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(0%);
+  }
+}
+
+#my-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}

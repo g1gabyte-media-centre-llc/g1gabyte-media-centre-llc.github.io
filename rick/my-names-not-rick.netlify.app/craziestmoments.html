@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/roll.css" />
+    <link rel="icon" href="./assets/favicon.ico" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="twitter:site" content="@publisher_handle" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Craziest Moments of 2022!" />
+    <meta name="twitter:description" content="Some of the absolutely craziest moments of 2022. These people will leave you mind blown." />
+    <meta name="twitter:creator" content="@MemeTank10" />
+    <!-- card images must be at least 280x150px -->
+    <meta name="twitter:image" content="https://my-names-not-rick.netlify.app/assets/images/AwesomeTwitterImage.png" />
+
+    <!-- data for Facebook -->
+    <meta property="og:title" content="Craziest Moments of 2022!" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://my-names-not-rick.netlify.app/craziestmoments.html" />
+    <meta property="og:image" content="https://my-names-not-rick.netlify.app/assets/images/AwesomeFacebookImage.jpg" />
+    <meta property="og:description" content="Some of the absolutely craziest moments of 2022. These people will leave you mind blown." />
+    <meta property="og:site_name" content="Craziest Moments of 2022" />
+    <title>Craziest Moments of 2022</title>
+  </head>
+  <body id="play">
+    <div class="cont">
+      <h1 class="text--center cont__header">Craziest Moments of 2022!</h1>
+      <div class="border">
+        <div class="play-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 24 24">
+            <path
+              d="M21.593 7.203a2.506 2.506 0 0 0-1.762-1.766C18.265 5.007 12 5 12 5s-6.264-.007-7.831.404a2.56 2.56 0 0 0-1.766 1.778c-.413 1.566-.417 4.814-.417 4.814s-.004 3.264.406 4.814c.23.857.905 1.534 1.763 1.765 1.582.43 7.83.437 7.83.437s6.265.007 7.831-.403a2.515 2.515 0 0 0 1.767-1.763c.414-1.565.417-4.812.417-4.812s.02-3.265-.407-4.831zM9.996 15.005l.005-6 5.207 3.005-5.212 2.995z"
+            ></path>
+          </svg>
+        </div>
+        <div class="white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" style="fill: white">
+            <path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886z"></path>
+          </svg>
+        </div>
+        <img src="./assets/images/people-awesome.jpg" alt="" class="thumbnail" />
+      </div>
+    </div>
+    <div class="roll">
+      <img src="./assets/images/rickroll.gif" alt="" class="rick" />
+      <audio src="./assets/images/rollmusic.mp3" id="song"></audio>
+      <div class="holder">
+        <div class="slider-cont fc-col">
+          <h1 class="m-0 text--center">You just got Rick Rolled By:</h1>
+          <h1 class="mt-0 text--underline text--center name">g1gabyteDEV!</h1>
+          <img src="g1gabyte.dev/favicon.ico" alt="Profile Pic" class="pic mb-1" />
+          <p class="message"></p>
+        </div>
+      </div>
+      <canvas id="my-canvas"></canvas>
+    </div>
+  </body>
+  <script src="./assets/scripts/encrypt.js"></script>
+
+  <script>
+    (function () {
+      var played = false;
+      var cont = document.querySelector('.cont');
+      var roll = document.querySelector('.roll');
+      playSong(true);
+
+      var play = document.querySelector('#play');
+      play.addEventListener('click', function () {
+        playSong(false);
+      });
+
+      function playSong(first) {
+        if (played) return;
+
+        document
+          .getElementById('song')
+          .play()
+          .then(() => {
+            showRick();
+            played = true;
+          })
+          .catch(err => {
+            if (first) {
+              showCont();
+            } else {
+              showRick();
+              played = true;
+            }
+          });
+      }
+
+      function showCont() {
+        cont.style.display = 'block';
+        roll.style.display = 'none';
+      }
+
+      function showRick() {
+        cont.style.display = 'none';
+        roll.style.display = 'block';
+        setTimeout(() => {
+          var confettiElement = document.getElementById('my-canvas');
+          var confettiSettings = { target: confettiElement };
+          var confetti = new ConfettiGenerator(confettiSettings);
+          confetti.render();
+          setTimeout(() => {
+            confetti.clear();
+          }, 8000);
+        }, 6600);
+      }
+
+      var queryString = window.location.search;
+      var urlParams = new URLSearchParams(queryString);
+      var nameParam = urlParams.get('name');
+      var imgParam = urlParams.get('img');
+      var messageParam = urlParams.get('message');
+      var name = document.querySelector('.name');
+      var img = document.querySelector('.pic');
+      var message = document.querySelector('.message');
+
+      if (nameParam) {
+        name.innerHTML = decrypt(nameParam.replace(/['"]+/g, ''));
+      }
+      if (imgParam) {
+        img.src = imgParam.replace(/['"]+/g, '');
+      } else {
+        img.src = 'https://avatars.dicebear.com/api/pixel-art-neutral/' + nameParam + '.svg';
+      }
+      if (messageParam) {
+        message.innerHTML = decrypt(messageParam.replace(/['"]+/g, ''));
+      }
+
+      img.addEventListener('error', function () {
+        img.src = 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
+      });
+    })();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js" async defer></script>
+</html>
